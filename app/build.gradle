@@ -49,8 +49,6 @@ dependencies {
     // -- Navigation
     implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
     implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
-    // -- SearchView
-    implementation 'com.github.Ferfalk:SimpleSearchView:0.2.0'
     // -- Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     // -- Gson
@@ -61,6 +59,8 @@ dependencies {
     // -- Coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.4'
+    // -- MaterialSearchBar
+    implementation 'com.github.mancj:MaterialSearchBar:0.8.5'
     // -- Room
     implementation 'androidx.room:room-ktx:2.5.0'
     kapt 'androidx.room:room-compiler:2.5.0'

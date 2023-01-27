@@ -19,11 +19,11 @@ import com.diegochancafe.pokedex.domain.model.PokemonModelDomain
 import com.diegochancafe.pokedex.view.adapter.PokemonAdapter
 import com.diegochancafe.pokedex.view.callback.IPokemonCallback
 import com.diegochancafe.pokedex.viewmodel.HomeViewModel
-import com.ferfalk.simplesearchview.SimpleSearchView
 import dagger.hilt.android.AndroidEntryPoint
 
+
 @AndroidEntryPoint
-class HomeFragment : Fragment(), IPokemonCallback{
+class HomeFragment : Fragment(), IPokemonCallback {
     // --
     private val viewModel: HomeViewModel by viewModels()
     // --
@@ -56,7 +56,6 @@ class HomeFragment : Fragment(), IPokemonCallback{
     private fun setupUI() {
         // --
         viewBinding.rvList.apply {
-//            layoutManager = LinearLayoutManager(appContext, LinearLayoutManager.VERTICAL, false)
             layoutManager = GridLayoutManager(appContext, 2)
             adapter = pokemonAdapter
         }
@@ -65,7 +64,7 @@ class HomeFragment : Fragment(), IPokemonCallback{
     // --
     private fun setupViewModel() {
         // --
-//        viewBinding.rlFleetsLoader.visibility = View.VISIBLE
+        viewBinding.rlLoader.visibility = View.VISIBLE
         // --
         viewModel.getPokemon()
         // --
@@ -86,14 +85,7 @@ class HomeFragment : Fragment(), IPokemonCallback{
     private val isLoadingObserver = Observer<Boolean> { response ->
         // --
         if (!response) {
-            // --
-//            viewBinding.srlDevices.isRefreshing = false
-//            viewBinding.rlDevicesLoader.visibility = View.GONE
-//            // --
-//            isReload = false
-//            // --
-//            checkItemsLength()
-//            startInterval()
+            viewBinding.rlLoader.visibility = View.GONE
         }
     }
 
@@ -101,6 +93,12 @@ class HomeFragment : Fragment(), IPokemonCallback{
     private val errorMessageObserver = Observer<String> { response ->
         // --
         Toast.makeText(appContext, response, Toast.LENGTH_LONG).show()
+    }
+
+    // --
+    override fun onItemPokemonClicked(pokemonModelDomain: PokemonModelDomain) {
+        // --
+        Log.d("TAG", "onItemPokemonClicked: $pokemonModelDomain")
     }
 
 }

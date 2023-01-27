@@ -18,7 +18,7 @@ class PokemonRepository @Inject constructor(
         // --
         val data: MutableList<PokemonModelDomain> = mutableListOf()
         // --
-        for (i in 1..3) {
+        for (i in 1..20) {
             val result = api.getPokemon(i)
             if (result != null) {
                 data.add(result.toDomain())

@@ -52,6 +52,7 @@ class PokemonAdapter(private val listener: IPokemonCallback, private val appCont
             .into(holder.itemPhoto)
         // --
         holder.item.setOnClickListener {
+            listener.onItemPokemonClicked(data)
         }
 
     }
