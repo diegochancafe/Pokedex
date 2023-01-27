@@ -13,4 +13,6 @@ interface IRetrofitApi {
     suspend fun getPokemon(
         @Path("id") id: Int,
     ): Response<PokemonModelResponse?>
+
+    // bulbasaur https://pokeapi.co/api/v2/evolution-chain/1/
 }

@@ -2,10 +2,7 @@ package com.diegochancafe.pokedex.view.ui.detail
 
 import android.content.Context
 import android.graphics.Color
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +11,10 @@ import com.bumptech.glide.Glide
 import com.diegochancafe.pokedex.R
 import com.diegochancafe.pokedex.databinding.FragmentPokemonDetailDialogBinding
 import com.diegochancafe.pokedex.domain.model.PokemonModelDomain
+import com.diegochancafe.pokedex.view.adapter.ViewPagerAdapter
+import com.diegochancafe.pokedex.view.ui.detail.attacks.AttacksFragment
+import com.diegochancafe.pokedex.view.ui.detail.evolutions.EvolutionsFragment
+import com.diegochancafe.pokedex.view.ui.detail.places.PlacesFragment
 import com.diegochancafe.pokedex.viewmodel.PokemonDetailDialogViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -28,6 +29,7 @@ class PokemonDetailDialogFragment : DialogFragment() {
     private lateinit var viewBinding: FragmentPokemonDetailDialogBinding
     private lateinit var viewModel: PokemonDetailDialogViewModel
     private lateinit var appContext: Context
+    private lateinit var viewPagerAdapter: ViewPagerAdapter
     private lateinit var pokemonModelDomain: PokemonModelDomain
 
     // --
@@ -50,13 +52,28 @@ class PokemonDetailDialogFragment : DialogFragment() {
         // --
         appContext = view.context
         pokemonModelDomain = arguments?.getSerializable("pokemonModelDomain") as PokemonModelDomain
+        viewPagerAdapter = ViewPagerAdapter(childFragmentManager)
         // --
         viewBinding.fabClose.setColorFilter(Color.WHITE)
         viewBinding.fabClose.setOnClickListener {
             dismiss()
         }
         // --
+        setupTabs()
         setDataForDetail()
+    }
+
+    // --
+    private fun setupTabs() {
+        // --
+        viewPagerAdapter.addFragment(EvolutionsFragment(pokemonModelDomain), "Evoluciones")
+        viewPagerAdapter.addFragment(AttacksFragment(pokemonModelDomain), "Ataques")
+        viewPagerAdapter.addFragment(PlacesFragment(pokemonModelDomain), "Lugares")
+        // --
+        viewBinding.viewPager.adapter = viewPagerAdapter
+        viewBinding.tabLayouts.setupWithViewPager(viewBinding.viewPager)
+        // --
+        viewBinding.tabLayouts.getTabAt(0)
     }
 
     private fun setDataForDetail() {

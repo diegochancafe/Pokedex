@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.diegochancafe.pokedex.R
 import com.diegochancafe.pokedex.databinding.FragmentHomeBinding
 import com.diegochancafe.pokedex.domain.model.PokemonModelDomain
-import com.diegochancafe.pokedex.view.adapter.PokemonAdapter
+import com.diegochancafe.pokedex.view.ui.home.adapter.PokemonAdapter
 import com.diegochancafe.pokedex.view.callback.IPokemonCallback
 import com.diegochancafe.pokedex.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint

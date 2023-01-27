@@ -1,4 +1,4 @@
-package com.diegochancafe.pokedex.view.adapter
+package com.diegochancafe.pokedex.view.ui.home.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
