@@ -12,18 +12,24 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.diegochancafe.pokedex.databinding.FragmentHomeBinding
 import com.diegochancafe.pokedex.domain.model.PokemonModelDomain
+import com.diegochancafe.pokedex.view.adapter.PokemonAdapter
+import com.diegochancafe.pokedex.view.callback.IPokemonCallback
 import com.diegochancafe.pokedex.viewmodel.HomeViewModel
+import com.ferfalk.simplesearchview.SimpleSearchView
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), IPokemonCallback{
     // --
     private val viewModel: HomeViewModel by viewModels()
     // --
     private lateinit var viewBinding: FragmentHomeBinding
     private lateinit var appContext: Context
+    private lateinit var pokemonAdapter: PokemonAdapter
 
     // --
     override fun onCreateView(
@@ -40,7 +46,20 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         // --
         appContext = view.context
+        pokemonAdapter = PokemonAdapter(this, appContext)
+        // --
+        setupUI()
         setupViewModel()
+    }
+
+    // --
+    private fun setupUI() {
+        // --
+        viewBinding.rvList.apply {
+//            layoutManager = LinearLayoutManager(appContext, LinearLayoutManager.VERTICAL, false)
+            layoutManager = GridLayoutManager(appContext, 2)
+            adapter = pokemonAdapter
+        }
     }
 
     // --
@@ -59,7 +78,8 @@ class HomeFragment : Fragment() {
     private val pokemonModelDomainObserver = Observer<List<PokemonModelDomain>> { response ->
         // --
         Log.d("TAG", "ATRAPALOS YA!: ")
-        Log.d("TAG", "$response: ")
+        Log.d("TAG", "${response.last()}: ")
+        pokemonAdapter.updateData(response)
     }
 
     // --

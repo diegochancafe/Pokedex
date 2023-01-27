@@ -1,8 +1,5 @@
 package com.diegochancafe.pokedex.data.model.response
 
-import androidx.room.TypeConverter
-import androidx.room.TypeConverters
-import com.diegochancafe.pokedex.data.database.entities.Converters
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
@@ -15,8 +12,8 @@ data class PokemonModelResponse (
 //    val height: Int,
     val id: Int,
 //    @SerializedName("is_default") val isDefault: Boolean,
-//    @SerializedName("location_area_encounters") val locationAreaEncounters: String,
-//    val moves: List<PokemonMove>,
+    @SerializedName("location_area_encounters") val locationAreaEncounters: String,
+    val moves: List<PokemonMove>,
     val name: String
 //    val order: Int,
 //    val species: PokemonInfo,
@@ -47,8 +44,8 @@ data class PokemonSprites (
 
 // --
 data class PokemonMove (
-    val move: PokemonInfo,
-    @SerializedName("version_group_details") val versionGroupDetails: List<PokemonVersionGroupDetail>
+    val move: PokemonInfo
+//    @SerializedName("version_group_details") val versionGroupDetails: List<PokemonVersionGroupDetail>
 ): Serializable
 
 // --

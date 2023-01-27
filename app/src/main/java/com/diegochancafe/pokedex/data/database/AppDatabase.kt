@@ -4,7 +4,6 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.diegochancafe.pokedex.data.database.dao.IPokemonDao
-import com.diegochancafe.pokedex.data.database.entities.Converters
 import com.diegochancafe.pokedex.data.database.entities.PokemonEntity
 
 @Database(entities = [
