@@ -5,6 +5,7 @@ import com.diegochancafe.pokedex.data.database.Converters
 import com.diegochancafe.pokedex.data.model.response.*
 import com.diegochancafe.pokedex.domain.model.*
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 // --
 @Entity(tableName = "pokemon_table")
@@ -22,12 +23,13 @@ data class PokemonEntity (
     @ColumnInfo("location_area_encounters") val locationAreaEncounters: String,
     @TypeConverters(Converters::class)
     @ColumnInfo("moves") val moves: List<PokemonMoveEntity>,
-    @ColumnInfo("name") val name: String
+    @ColumnInfo("name") val name: String,
 //    @ColumnInfo("order") val order: Int,
 //    @ColumnInfo("species") val species: PokemonInfo,
 //    @ColumnInfo("sprites") val sprites: PokemonSprites,
 //    @ColumnInfo("stats") val stats: List<PokemonStat>,
-//    @ColumnInfo("types") val types: List<PokemonType>,
+    @TypeConverters(Converters::class)
+    @ColumnInfo("types") val types: List<PokemonTypeEntity>
 //    @ColumnInfo("weight") val weight: Int
 )
 
@@ -39,10 +41,14 @@ data class PokemonAbilityEntity (
 
 // --
 data class PokemonInfoEntity (
-    @SerializedName("name") val name: String,
-    @SerializedName("url") val url: String
+    @ColumnInfo("name") val name: String,
+    @ColumnInfo("url") val url: String
 )
 
+data class PokemonTypeEntity(
+    @ColumnInfo("slot") val slot: Int,
+    @ColumnInfo("type") val type: PokemonInfoEntity
+)
 
 data class PokemonMoveEntity (
     @ColumnInfo("move") val move: PokemonInfoEntity
@@ -51,5 +57,6 @@ data class PokemonMoveEntity (
 
 fun PokemonMoveDomain.toDatabase() = PokemonMoveEntity(move.toDatabase())
 fun PokemonInfoDomain.toDatabase() = PokemonInfoEntity(name, url)
+fun PokemonTypeDomain.toDatabase() = PokemonTypeEntity(slot, type.toDatabase())
 fun PokemonAbilityDomain.toDatabase() = PokemonAbilityEntity(ability.toDatabase(), isHidden, slot)
-fun PokemonModelDomain.toDatabase() = PokemonEntity(abilities.map { it.toDatabase() }, id, locationAreaEncounters, moves.map { it.toDatabase() }, name)
+fun PokemonModelDomain.toDatabase() = PokemonEntity(abilities.map { it.toDatabase() }, id, locationAreaEncounters, moves.map { it.toDatabase() }, name, types.map { it.toDatabase() })

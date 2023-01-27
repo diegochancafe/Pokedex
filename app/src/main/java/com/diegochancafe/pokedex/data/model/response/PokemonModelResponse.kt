@@ -14,12 +14,12 @@ data class PokemonModelResponse (
 //    @SerializedName("is_default") val isDefault: Boolean,
     @SerializedName("location_area_encounters") val locationAreaEncounters: String,
     val moves: List<PokemonMove>,
-    val name: String
+    val name: String,
 //    val order: Int,
 //    val species: PokemonInfo,
 //    val sprites: PokemonSprites,
 //    val stats: List<PokemonStat>,
-//    val types: List<PokemonType>,
+    val types: List<PokemonType>,
 //    val weight: Int
 ): Serializable
 

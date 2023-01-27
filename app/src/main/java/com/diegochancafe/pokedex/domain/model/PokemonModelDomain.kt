@@ -1,13 +1,7 @@
 package com.diegochancafe.pokedex.domain.model
 
-import com.diegochancafe.pokedex.data.database.entities.PokemonAbilityEntity
-import com.diegochancafe.pokedex.data.database.entities.PokemonEntity
-import com.diegochancafe.pokedex.data.database.entities.PokemonInfoEntity
-import com.diegochancafe.pokedex.data.database.entities.PokemonMoveEntity
-import com.diegochancafe.pokedex.data.model.response.PokemonAbility
-import com.diegochancafe.pokedex.data.model.response.PokemonInfo
-import com.diegochancafe.pokedex.data.model.response.PokemonModelResponse
-import com.diegochancafe.pokedex.data.model.response.PokemonMove
+import com.diegochancafe.pokedex.data.database.entities.*
+import com.diegochancafe.pokedex.data.model.response.*
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
@@ -21,12 +15,12 @@ data class PokemonModelDomain (
 //    @SerializedName("is_default") val isDefault: Boolean,
     val locationAreaEncounters: String,
     val moves: List<PokemonMoveDomain>,
-    val name: String
+    val name: String,
 //    val order: Int,
 //    val species: PokemonInfo,
 //    val sprites: PokemonSprites,
 //    val stats: List<PokemonStat>,
-//    val types: List<PokemonType>,
+    val types: List<PokemonTypeDomain>
 //    val weight: Int
 ): Serializable
 
@@ -69,17 +63,18 @@ data class PokemonMoveDomain (
 //    val stat: PokemonInfo
 //): Serializable
 //
-//// --
-//data class PokemonType (
-//    val slot: Long,
-//    val type: PokemonInfo
-//): Serializable
+// --
+data class PokemonTypeDomain (
+    val slot: Int,
+    val type: PokemonInfoDomain
+): Serializable
 
 // --
 data class PokemonInfoDomain (
     val name: String,
     val url: String
 ): Serializable
+
 
 
 // --
@@ -89,8 +84,11 @@ fun PokemonMoveEntity.toDomain() = PokemonMoveDomain(move.toDomain())
 fun PokemonInfo.toDomain() = PokemonInfoDomain(name, url)
 fun PokemonInfoEntity.toDomain() = PokemonInfoDomain(name, url)
 // --
+fun PokemonType.toDomain() = PokemonTypeDomain(slot, type.toDomain())
+fun PokemonTypeEntity.toDomain() = PokemonTypeDomain(slot, type.toDomain())
+// --
 fun PokemonAbility.toDomain() = PokemonAbilityDomain(ability.toDomain(), isHidden, slot)
 fun PokemonAbilityEntity.toDomain() = PokemonAbilityDomain(ability.toDomain(), isHidden, slot)
 // --
-fun PokemonModelResponse.toDomain() = PokemonModelDomain(abilities.map { it.toDomain() }, id, locationAreaEncounters, moves.map { it.toDomain() }, name)
-fun PokemonEntity.toDomain() = PokemonModelDomain(abilities.map { it.toDomain() }, id, locationAreaEncounters, moves.map { it.toDomain() }, name)
+fun PokemonModelResponse.toDomain() = PokemonModelDomain(abilities.map { it.toDomain() }, id, locationAreaEncounters, moves.map { it.toDomain() }, name, types.map { it.toDomain() })
+fun PokemonEntity.toDomain() = PokemonModelDomain(abilities.map { it.toDomain() }, id, locationAreaEncounters, moves.map { it.toDomain() }, name, types.map { it.toDomain() })
