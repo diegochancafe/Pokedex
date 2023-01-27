@@ -8,12 +8,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.os.bundleOf
+import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.DialogFragment.STYLE_NORMAL
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
+import com.diegochancafe.pokedex.R
 import com.diegochancafe.pokedex.databinding.FragmentHomeBinding
 import com.diegochancafe.pokedex.domain.model.PokemonModelDomain
 import com.diegochancafe.pokedex.view.adapter.PokemonAdapter
@@ -98,7 +101,9 @@ class HomeFragment : Fragment(), IPokemonCallback {
     // --
     override fun onItemPokemonClicked(pokemonModelDomain: PokemonModelDomain) {
         // --
-        Log.d("TAG", "onItemPokemonClicked: $pokemonModelDomain")
+        val bundle = bundleOf("pokemonModelDomain" to pokemonModelDomain)
+        // --
+        findNavController().navigate(R.id.navigationPokemonDetailDialogFragment, bundle)
     }
 
 }

@@ -11,4 +11,10 @@
         android:label="Pokedex"
         tools:layout="@layout/fragment_home" />
 
+    <dialog
+        android:id="@+id/navigationPokemonDetailDialogFragment"
+        android:name="com.diegochancafe.pokedex.view.ui.detail.PokemonDetailDialogFragment"
+        android:label="fragment_pokemon_detail_dialog"
+        tools:layout="@layout/fragment_pokemon_detail_dialog" />
+
 </navigation>
