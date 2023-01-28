@@ -6,6 +6,7 @@ import com.diegochancafe.pokedex.data.model.response.PokemonModelResponse
 import com.diegochancafe.pokedex.data.network.service.PokemonService
 import com.diegochancafe.pokedex.domain.model.PokemonModelDomain
 import com.diegochancafe.pokedex.domain.model.toDomain
+import com.diegochancafe.pokedex.util.Config
 import javax.inject.Inject
 
 class PokemonRepository @Inject constructor(
@@ -18,7 +19,7 @@ class PokemonRepository @Inject constructor(
         // --
         val data: MutableList<PokemonModelDomain> = mutableListOf()
         // --
-        for (i in 1..20) {
+        for (i in 1..Config.COUNT_POKEMON) {
             val result = api.getPokemon(i)
             if (result != null) {
                 data.add(result.toDomain())
