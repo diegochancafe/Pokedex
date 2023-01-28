@@ -72,18 +72,26 @@ class EvolutionsFragment(private val pokemonModelDomain: PokemonModelDomain) : F
     private val evolutionModelDomainObserver = Observer<EvolutionModelDomain?> { response ->
         // --
         val evolutions: MutableList<PokemonInfoDomain> = mutableListOf()
-        // -- First evolution
-        evolutions.add(response.chain.species)
-        // -- Second evolution
-        if (response.chain.evolvesTo.isNotEmpty()) {
-            evolutions.add(response.chain.evolvesTo.first().species)
-            // -- Third evolution
-            if (response.chain.evolvesTo.first().evolvesTo.isNotEmpty()) {
-                evolutions.add(response.chain.evolvesTo.first().evolvesTo.first().species)
+        if (response != null) {
+            // -- First evolution
+            evolutions.add(response.chain.species)
+            // -- Second evolution
+            if (response.chain.evolvesTo.isNotEmpty()) {
+                evolutions.add(response.chain.evolvesTo.first().species)
+                // -- Third evolution
+                if (response.chain.evolvesTo.first().evolvesTo.isNotEmpty()) {
+                    evolutions.add(response.chain.evolvesTo.first().evolvesTo.first().species)
+                }
             }
+            // --
+            evolutionAdapter.updateData(evolutions)
+            // --
+            viewBinding.tvEmptyMessage.visibility = View.GONE
+        } else {
+            // --
+           viewBinding.tvEmptyMessage.visibility = View.VISIBLE
         }
-        // --
-        evolutionAdapter.updateData(evolutions)
+
     }
 
     // --
