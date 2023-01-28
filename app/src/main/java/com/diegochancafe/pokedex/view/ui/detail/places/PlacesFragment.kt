@@ -20,12 +20,13 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class PlacesFragment(private val pokemonModelDomain: PokemonModelDomain) : Fragment() {
-
+    // --
     private val viewModel: PlacesViewModel by viewModels()
     private lateinit var viewBinding: FragmentPlacesBinding
     private lateinit var appContext: Context
     private lateinit var placeAdapter: PlaceAdapter
 
+    // --
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -34,6 +35,7 @@ class PlacesFragment(private val pokemonModelDomain: PokemonModelDomain) : Fragm
         return viewBinding.root
     }
 
+    // --
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         // --

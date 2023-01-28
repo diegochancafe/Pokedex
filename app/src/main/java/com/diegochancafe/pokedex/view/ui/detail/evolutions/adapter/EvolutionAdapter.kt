@@ -1,4 +1,4 @@
-package com.diegochancafe.pokedex.view.ui.detail.places.adapter
+package com.diegochancafe.pokedex.view.ui.detail.evolutions.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -7,13 +7,14 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.diegochancafe.pokedex.databinding.ViewTextItemBinding
-import com.diegochancafe.pokedex.domain.model.PlaceModelDomain
+import com.diegochancafe.pokedex.domain.model.PokemonInfoDomain
+import com.diegochancafe.pokedex.domain.model.PokemonMoveDomain
+import com.diegochancafe.pokedex.domain.model.SpecieModelDomain
 import java.util.ArrayList
 
-// --
-class PlaceAdapter(private val appContext: Context): RecyclerView.Adapter<PlaceAdapter.ViewHolder>() {
+class EvolutionAdapter(private val appContext: Context): RecyclerView.Adapter<EvolutionAdapter.ViewHolder>() {
     // --
-    private var list = ArrayList<PlaceModelDomain>()
+    private var list = ArrayList<PokemonInfoDomain>()
 
     // --
     class ViewHolder(viewBinding: ViewTextItemBinding): RecyclerView.ViewHolder(viewBinding.root) {
@@ -37,14 +38,14 @@ class PlaceAdapter(private val appContext: Context): RecyclerView.Adapter<PlaceA
     // --
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         // --
-        val data: PlaceModelDomain = list[position]
+        val data: PokemonInfoDomain = list[position]
         // --
-        holder.itemDescription.text = data.locationArea.name!!.replace("-", " ")
+        holder.itemDescription.text = data.name!!.replace("-", " ")
     }
 
     // --
     @SuppressLint("NotifyDataSetChanged")
-    fun updateData(data: List<PlaceModelDomain>) {
+    fun updateData(data: List<PokemonInfoDomain>) {
         // --
         list.clear()
         list.addAll(data)

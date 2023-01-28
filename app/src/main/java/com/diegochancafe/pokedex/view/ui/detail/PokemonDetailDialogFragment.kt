@@ -81,11 +81,11 @@ class PokemonDetailDialogFragment : DialogFragment() {
         if (pokemonModelDomain.abilities.isNotEmpty()) {
             // --
             val count = pokemonModelDomain.abilities.count()
-            viewBinding.tvAbilityOne.text = pokemonModelDomain.abilities.first().ability.name.replace("-", " ")
+            viewBinding.tvAbilityOne.text = pokemonModelDomain.abilities.first().ability.name!!.replace("-", " ")
             // --
             if (count > 1) {
                 viewBinding.tvAbilityTwo.visibility = View.VISIBLE
-                viewBinding.tvAbilityTwo.text = pokemonModelDomain.abilities.last().ability.name.replace("-", " ")
+                viewBinding.tvAbilityTwo.text = pokemonModelDomain.abilities.last().ability.name!!.replace("-", " ")
             } else {
                 viewBinding.tvAbilityTwo.visibility = View.GONE
             }
@@ -95,11 +95,11 @@ class PokemonDetailDialogFragment : DialogFragment() {
         if (pokemonModelDomain.types.isNotEmpty()) {
             // --
             val count = pokemonModelDomain.types.count()
-            viewBinding.tvTypeOne.text = pokemonModelDomain.types.first().type.name.replace("-", " ")
+            viewBinding.tvTypeOne.text = pokemonModelDomain.types.first().type.name!!.replace("-", " ")
             // --
             if (count > 1) {
                 viewBinding.tvTypeTwo.visibility = View.VISIBLE
-                viewBinding.tvTypeTwo.text = pokemonModelDomain.types.last().type.name.replace("-", " ")
+                viewBinding.tvTypeTwo.text = pokemonModelDomain.types.last().type.name!!.replace("-", " ")
             } else {
                 viewBinding.tvTypeTwo.visibility = View.GONE
             }

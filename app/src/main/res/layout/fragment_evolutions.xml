@@ -5,9 +5,10 @@
     android:layout_height="match_parent"
     tools:context=".view.ui.detail.evolutions.EvolutionsFragment">
 
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Hello" />
+        android:layout_margin="20dp"/>
 
 </FrameLayout>

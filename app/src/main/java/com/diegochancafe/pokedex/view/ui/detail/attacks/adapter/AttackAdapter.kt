@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.diegochancafe.pokedex.data.model.response.PokemonMove
 import com.diegochancafe.pokedex.databinding.ViewTextItemBinding
 import com.diegochancafe.pokedex.domain.model.PokemonMoveDomain
 import java.util.ArrayList
@@ -39,7 +38,7 @@ class AttackAdapter(private val appContext: Context): RecyclerView.Adapter<Attac
         // --
         val data: PokemonMoveDomain = list[position]
         // --
-        holder.itemDescription.text = data.move.name.replace("-", " ")
+        holder.itemDescription.text = data.move.name!!.replace("-", " ")
     }
 
     // --

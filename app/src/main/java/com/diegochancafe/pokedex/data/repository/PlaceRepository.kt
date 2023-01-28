@@ -15,10 +15,14 @@ class PlaceRepository @Inject constructor(
     // --
     suspend fun getPlacesFromApi(url: String): List<PlaceModelDomain> {
         // --
-        val data: MutableList<PlaceModelDomain> = mutableListOf()
-        // --
         val result = api.getPlaces(url)
         // --
-        return result?.map { it.toDomain() } ?: emptyList()
+        return if (result != null) {
+            // --
+            val response: List<PlaceModelDomain> = result.map { it.toDomain() }
+            response
+        } else {
+            emptyList()
+        }
     }
 }

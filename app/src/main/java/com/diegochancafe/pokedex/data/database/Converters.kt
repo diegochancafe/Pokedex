@@ -2,6 +2,7 @@ package com.diegochancafe.pokedex.data.database
 
 import androidx.room.TypeConverter
 import com.diegochancafe.pokedex.data.database.entities.PokemonAbilityEntity
+import com.diegochancafe.pokedex.data.database.entities.PokemonInfoEntity
 import com.diegochancafe.pokedex.data.database.entities.PokemonMoveEntity
 import com.diegochancafe.pokedex.data.database.entities.PokemonTypeEntity
 import com.google.gson.Gson
@@ -46,6 +47,20 @@ object Converters {
         return Gson().fromJson<List<PokemonTypeEntity>>(
             types,
             object : TypeToken<ArrayList<PokemonTypeEntity?>?>() {}.type
+        )
+    }
+
+
+    @TypeConverter
+    fun listToJsonPokemonSpecie(types: PokemonInfoEntity?): String {
+        return Gson().toJson(types)
+    }
+
+    @TypeConverter
+    fun jsonToListPokemonSpecie(types: String?): PokemonInfoEntity {
+        return Gson().fromJson<PokemonInfoEntity>(
+            types,
+            object : TypeToken<PokemonInfoEntity?>() {}.type
         )
     }
 }

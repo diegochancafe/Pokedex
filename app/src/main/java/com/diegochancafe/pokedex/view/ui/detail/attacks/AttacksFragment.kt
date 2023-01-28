@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.diegochancafe.pokedex.data.model.response.PokemonMove
 import com.diegochancafe.pokedex.databinding.FragmentAttacksBinding
 import com.diegochancafe.pokedex.domain.model.PokemonModelDomain
 import com.diegochancafe.pokedex.domain.model.PokemonMoveDomain

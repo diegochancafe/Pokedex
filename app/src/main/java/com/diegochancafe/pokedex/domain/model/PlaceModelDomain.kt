@@ -8,5 +8,5 @@ data class PlaceModelDomain (
     val locationArea: PokemonInfoDomain
 ): Serializable
 
-// --
+// -- Extension
 fun PlaceModelResponse.toDomain() = PlaceModelDomain(locationArea.toDomain())

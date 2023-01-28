@@ -1,7 +1,9 @@
 package com.diegochancafe.pokedex.data.network
 
+import com.diegochancafe.pokedex.data.model.response.EvolutionModelResponse
 import com.diegochancafe.pokedex.data.model.response.PlaceModelResponse
 import com.diegochancafe.pokedex.data.model.response.PokemonModelResponse
+import com.diegochancafe.pokedex.data.model.response.SpecieModelResponse
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -21,6 +23,13 @@ interface IRetrofitApi {
         @Url url: String
     ): Response<List<PlaceModelResponse>>
 
+    @GET
+    suspend fun getSpecie(
+        @Url url: String
+    ): Response<SpecieModelResponse>
 
-    // bulbasaur https://pokeapi.co/api/v2/evolution-chain/1/
+    @GET
+    suspend fun getEvolution(
+        @Url url: String
+    ): Response<EvolutionModelResponse>
 }
