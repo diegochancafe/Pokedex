@@ -3,12 +3,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/red"
     tools:context=".view.ui.detail.places.PlacesFragment">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello" />
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:orientation="vertical">
+
+      <androidx.recyclerview.widget.RecyclerView
+          android:id="@+id/rvList"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_margin="20dp"/>
+
+      <TextView
+          android:id="@+id/tvEmpty"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center"
+          android:layout_marginTop="20dp"
+          android:visibility="gone"
+          tools:visibility="visible"
+          android:text="No se encontraron lugares para este pokémon."/>
+
+   </LinearLayout>
+
+
 
 </FrameLayout>
