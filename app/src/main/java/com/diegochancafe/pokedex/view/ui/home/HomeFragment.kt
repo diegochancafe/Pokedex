@@ -2,15 +2,14 @@ package com.diegochancafe.pokedex.view.ui.home
 
 import android.content.Context
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
 import androidx.core.os.bundleOf
-import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.DialogFragment.STYLE_NORMAL
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -19,8 +18,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.diegochancafe.pokedex.R
 import com.diegochancafe.pokedex.databinding.FragmentHomeBinding
 import com.diegochancafe.pokedex.domain.model.PokemonModelDomain
-import com.diegochancafe.pokedex.view.ui.home.adapter.PokemonAdapter
 import com.diegochancafe.pokedex.view.callback.IPokemonCallback
+import com.diegochancafe.pokedex.view.ui.home.adapter.PokemonAdapter
 import com.diegochancafe.pokedex.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -51,6 +50,15 @@ class HomeFragment : Fragment(), IPokemonCallback {
         appContext = view.context
         pokemonAdapter = PokemonAdapter(this, appContext)
         // --
+        viewBinding.searchBar.addTextChangeListener(object : TextWatcher {
+            override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
+            override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
+                // --
+                pokemonAdapter.filter.filter(viewBinding.searchBar.text.trim())
+            }
+            override fun afterTextChanged(editable: Editable) {}
+        })
+        // --
         setupUI()
         setupViewModel()
     }
@@ -79,8 +87,6 @@ class HomeFragment : Fragment(), IPokemonCallback {
     // --
     private val pokemonModelDomainObserver = Observer<List<PokemonModelDomain>> { response ->
         // --
-        Log.d("TAG", "ATRAPALOS YA!: ")
-        Log.d("TAG", "${response.last()}: ")
         pokemonAdapter.updateData(response)
     }
 

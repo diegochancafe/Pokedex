@@ -19,7 +19,7 @@ import com.diegochancafe.pokedex.viewmodel.PlacesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class PlacesFragment(val pokemonModelDomain: PokemonModelDomain) : Fragment() {
+class PlacesFragment(private val pokemonModelDomain: PokemonModelDomain) : Fragment() {
 
     private val viewModel: PlacesViewModel by viewModels()
     private lateinit var viewBinding: FragmentPlacesBinding
