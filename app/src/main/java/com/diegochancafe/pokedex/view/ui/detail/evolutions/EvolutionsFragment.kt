@@ -11,14 +11,19 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.diegochancafe.pokedex.data.model.singleton.PokemonSingleton
 import com.diegochancafe.pokedex.databinding.FragmentEvolutionsBinding
 import com.diegochancafe.pokedex.domain.model.*
 import com.diegochancafe.pokedex.view.ui.detail.evolutions.adapter.EvolutionAdapter
 import com.diegochancafe.pokedex.viewmodel.EvolutionsViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class EvolutionsFragment(private val pokemonModelDomain: PokemonModelDomain) : Fragment() {
+    // --
+    @Inject
+    lateinit var listPokemonSingleton: PokemonSingleton
     // --
     private val viewModel: EvolutionsViewModel by viewModels()
     // --
@@ -38,7 +43,7 @@ class EvolutionsFragment(private val pokemonModelDomain: PokemonModelDomain) : F
         super.onViewCreated(view, savedInstanceState)
         // --
         appContext = view.context
-        evolutionAdapter = EvolutionAdapter(appContext)
+        evolutionAdapter = EvolutionAdapter(appContext, listPokemonSingleton)
         // --
         setupUI()
         setupViewModel()
@@ -56,7 +61,7 @@ class EvolutionsFragment(private val pokemonModelDomain: PokemonModelDomain) : F
     // --
     private fun setupViewModel() {
         // --
-        viewModel.getEvolutions(pokemonModelDomain.species.url)
+        viewModel.getEvolutions(pokemonModelDomain.species.url!!)
         // --
         viewModel.evolutionModelDomain.observe(this.viewLifecycleOwner, evolutionModelDomainObserver)
         viewModel.errorMessage.observe(this.viewLifecycleOwner, errorMessageObserver)

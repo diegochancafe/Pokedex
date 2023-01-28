@@ -40,6 +40,13 @@ class PokemonRepository @Inject constructor(
     }
 
     // --
+    suspend fun getPokemonByNameFromDatabase(name: String): List<PokemonModelDomain>  {
+        // --
+        val response: List<PokemonEntity> = pokemonDao.getPokemonByName(name)
+        return response.map { it.toDomain() }
+    }
+
+    // --
     suspend fun insertPokemonData(pokemonList: List<PokemonEntity>) {
         // --
         pokemonDao.insertAll(pokemonList)

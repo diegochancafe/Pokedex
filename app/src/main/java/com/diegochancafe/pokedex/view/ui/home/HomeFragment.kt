@@ -16,16 +16,21 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.diegochancafe.pokedex.R
+import com.diegochancafe.pokedex.data.model.singleton.PokemonSingleton
 import com.diegochancafe.pokedex.databinding.FragmentHomeBinding
 import com.diegochancafe.pokedex.domain.model.PokemonModelDomain
 import com.diegochancafe.pokedex.view.callback.IPokemonCallback
 import com.diegochancafe.pokedex.view.ui.home.adapter.PokemonAdapter
 import com.diegochancafe.pokedex.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 
 @AndroidEntryPoint
 class HomeFragment : Fragment(), IPokemonCallback {
+    // --
+    @Inject
+    lateinit var listPokemonSingleton: PokemonSingleton
     // --
     private val viewModel: HomeViewModel by viewModels()
     // --
@@ -87,6 +92,7 @@ class HomeFragment : Fragment(), IPokemonCallback {
     // --
     private val pokemonModelDomainObserver = Observer<List<PokemonModelDomain>> { response ->
         // --
+        listPokemonSingleton.listPokemonModelDomain = response
         pokemonAdapter.updateData(response)
     }
 

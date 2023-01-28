@@ -16,7 +16,7 @@ import com.diegochancafe.pokedex.viewmodel.AttacksViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class AttacksFragment(val pokemonModelDomain: PokemonModelDomain) : Fragment() {
+class AttacksFragment(private val pokemonModelDomain: PokemonModelDomain) : Fragment() {
     // --
     private val viewModel: AttacksViewModel by viewModels()
     // --
