@@ -14,6 +14,7 @@ Pokedex es una aplicación desarrollada en base a un desafío, cuenta con las nu
   <li>La aplicación cuenta con un listado de pokémon.</li>
   <li>Realizar búsqueda por nombres.</li>
   <li>Al seleccionar un pokemon de la lista, muestra sus detalles (Hábilidad, Tipo, Evoluciones, Ataques y Lugares)</li>
+  <li>Tener en cuenta que, para la primera carga del listado, es necesario contar con internet.</li>
 </ul>
 
 
